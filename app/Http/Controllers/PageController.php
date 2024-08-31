@@ -7,9 +7,15 @@ use Illuminate\Http\Request;
 
 class PageController extends Controller
 {
-    public function dashboard()
+    public function dashboard(Request $request)
     {
-        $posts = Post::latest()->get();
+        if ($request->get('for-my')) {
+            // $posts = Post::where('user_id',$request->user()->id)->latest()->get();
+            $posts = $request->user()->posts;
+        }
+        else {
+            $posts = Post::latest()->get();
+        }
 
         return view('dashboard', compact('posts'));
     }
