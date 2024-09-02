@@ -60,6 +60,7 @@ class User extends Authenticatable
         return $this->belongsToMany(User::class,'friends', 'to_id', 'from_id');
     }
     
+    // Fiends
     public function friendsFrom()
     {
         return $this->from()->wherePivot('accepted',true);
@@ -68,5 +69,16 @@ class User extends Authenticatable
     public function friendsTo()
     {
         return $this->to()->wherePivot('accepted',true);
+    }
+    
+    // Fiends request
+    public function pendingFrom()
+    {
+        return $this->from()->wherePivot('accepted',false);
+    }
+    
+    public function pendingTo()
+    {
+        return $this->to()->wherePivot('accepted',false);
     }
 }
