@@ -59,6 +59,11 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(User::class,'friends', 'to_id', 'from_id');
     }
+
+    public function friends()
+    {
+        return $this->friendsFrom->merge($this->friendsTo);
+    }
     
     // Fiends
     public function friendsFrom()
