@@ -22,4 +22,11 @@ class FriendController extends Controller
 
         return back();
     }
+
+    public function update(Request $request, User $user)
+    {
+        $request->user()->pendingTo()->updateExistingPivot($user,['accepted' => true]);
+
+        return back();
+    }
 }
